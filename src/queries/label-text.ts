@@ -84,6 +84,8 @@ const queryAllByLabelText: AllByText = (
         labelledElements.push(labelledElement)
       }
       if (labelsValue.length > 1) {
+        // If the labels comes from aria-labelledby should be join(' ')
+        // Probably to do before, don't really know where
         labelsValue.forEach((labelValue, index) => {
           if (matcher(labelValue, labelledElement, text, matchNormalizer)) {
             labelledElements.push(labelledElement)

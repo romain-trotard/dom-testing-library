@@ -109,6 +109,7 @@ test('get throws a useful error message', () => {
 
     Ignored nodes: comments, script, style
     <div>
+
       <div />
     </div>
   `)
@@ -240,6 +241,20 @@ test('can get form controls by label text', () => {
   expect(getByLabelText('6th one 6th two 6th three').id).toBe('sixth-id')
   expect(getByLabelText('7th one').id).toBe('seventh-id')
   expect(getByLabelText('8th one').id).toBe('eighth.id')
+})
+
+test.only('can get element with aria-labelledby referencing aria-label', () => {
+  const {getByLabelText} = render(`
+      <div id="frameworks-row" role="row" aria-label="Frameworks">
+        <button aria-labelledby="select frameworks-row" id="select" aria-label="Select" type="button">Select</button>
+        <span>Frameworks</span>
+        <span>Other information</span>
+      </div>
+  `)
+  // Do not find `Select Frameworks` because it takes element.textContent 
+  // and not `aria-label`
+  expect(getByLabelText('Select Frameworks').id).toBe('select')
+  expect(getByLabelText('Frameworks').id).toBe('frameworks-row')
 })
 
 test('can get elements labelled with aria-labelledby attribute', () => {

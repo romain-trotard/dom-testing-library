@@ -29,6 +29,7 @@ function getLabelContent(element: Element): string | null {
   if (element.tagName.toLowerCase() === 'label') {
     textContent = getTextContent(element)
   } else {
+    // textContent = (element as HTMLInputElement).value || element.getAttribute('aria-label' || element.textContent
     textContent = (element as HTMLInputElement).value || element.textContent
   }
   return textContent
